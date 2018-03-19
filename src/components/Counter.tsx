@@ -6,7 +6,6 @@ interface Props {
   count: number;
   decrement: () => any;
   decrement_async: () => any;
-  login: () => any;
 }
 
 export default class Counter extends Component<Props, {}> {
@@ -24,13 +23,6 @@ export default class Counter extends Component<Props, {}> {
             text="Async"
             onPress={this.props.decrement_async}
             backgroundColor="#4CAF50"
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            text="Login"
-            onPress={this.props.login}
-            backgroundColor="#FF00FF"
           />
         </View>
       </View>

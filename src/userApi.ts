@@ -1,9 +1,10 @@
 import { Auth } from "./models/user";
 
-export async function loginUser() {
-  const response = await fetch(
-    "http://localhost:1337/auth/login?email=matt.reetz@zymo.io&password=abcd1234"
-  );
+export async function loginUser(email: string, password: string) {
+  const response = await fetch("http://localhost:1337/auth/login", {
+    method: "post",
+    body: JSON.stringify({ email, password })
+  });
   const data = (await response.json()) as Auth;
   console.log(data.auth.email);
   return data;

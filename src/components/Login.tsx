@@ -18,10 +18,17 @@ import {
 } from "native-base";
 
 interface Props {
-  login: () => any;
+  email: string;
+  password: string;
+  login: (email: string, password: string) => any;
 }
 
-export default class FormExample extends Component<Props, {}> {
+interface State {
+  email: string;
+  password: string;
+}
+
+export default class FormExample extends Component<Props, State> {
   render() {
     return (
       <StyleProvider style={getTheme(platform)}>
@@ -33,11 +40,18 @@ export default class FormExample extends Component<Props, {}> {
             <Form>
               <Item floatingLabel style={styles.item}>
                 <Label>Email</Label>
-                <Input />
+                <Input
+                  autoCapitalize="none"
+                  keyboardType="email-address"
+                  onChangeText={text => this.setState({ email: text })}
+                />
               </Item>
               <Item floatingLabel style={styles.item}>
                 <Label>Password</Label>
-                <Input />
+                <Input
+                  secureTextEntry
+                  onChangeText={text => this.setState({ password: text })}
+                />
               </Item>
             </Form>
             <View style={styles.helpContainer}>
@@ -52,7 +66,12 @@ export default class FormExample extends Component<Props, {}> {
                 </Button>
               </View>
             </View>
-            <Button onPress={this.props.login} style={styles.button} dark block>
+            <Button
+              onPress={e => this.props.login(this.state.email, this.state.password)}
+              style={styles.button}
+              dark
+              block
+            >
               <Text style={styles.textContent}>Login</Text>
             </Button>
           </Content>

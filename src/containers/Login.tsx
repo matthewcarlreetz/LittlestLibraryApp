@@ -5,11 +5,16 @@ import * as LoginActions from "../redux/login/actions";
 import { connect } from "react-redux";
 import { Dispatch, AppState } from "../redux";
 
-interface DispatchProps {
-  login: () => any;
+interface ConnectProps {
+  email: string;
+  password: string;
 }
 
-class LoginContainer extends Component<{} & DispatchProps, {}> {
+interface DispatchProps {
+  login: (email: string, password: string) => any;
+}
+
+class LoginContainer extends Component<ConnectProps & DispatchProps, {}> {
   constructor(props) {
     super(props);
   }
@@ -19,9 +24,13 @@ class LoginContainer extends Component<{} & DispatchProps, {}> {
   }
 }
 
-export default connect<{}, DispatchProps>(
-  (state: AppState) => ({}),
+export default connect<ConnectProps, DispatchProps>(
+  (state: AppState) => ({
+    email: state.auth.email,
+    password: state.auth.password
+  }),
   (dispatch: Dispatch) => ({
-    login: () => dispatch(LoginActions.login())
+    login: (email: string, password: string) =>
+      dispatch(LoginActions.login({ email, password }))
   })
 )(LoginContainer);

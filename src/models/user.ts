@@ -13,3 +13,8 @@ export interface UserInfo {
   id: number;
   user: number;
 }
+
+export interface AuthData {
+  password: string;
+  email: string;
+}

@@ -32,7 +32,8 @@
       false
     ],
     "no-console": false,
-    "jsx-boolean-value": false
+    "jsx-boolean-value": false,
+    "jsx-no-lambda": false
   },
   "rulesDirectory": []
 }

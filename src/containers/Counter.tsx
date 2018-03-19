@@ -12,7 +12,6 @@ interface ConnectProps {
 interface DispatchProps {
   decrement: () => any;
   decrement_async: () => any;
-  login: () => any;
 }
 
 class CounterContainer extends Component<ConnectProps & DispatchProps, {}> {
@@ -34,7 +33,6 @@ export default connect<ConnectProps, DispatchProps>(
   }),
   (dispatch: Dispatch) => ({
     decrement: () => dispatch(CounterActions.decrement()),
-    decrement_async: () => dispatch(CounterActions.decrementAsync()),
-    login: () => dispatch(CounterActions.login())
+    decrement_async: () => dispatch(CounterActions.decrementAsync())
   })
 )(CounterContainer);
