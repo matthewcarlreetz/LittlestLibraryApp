@@ -1,34 +1,17 @@
-
 import { delay } from "redux-saga";
 import { put, takeEvery, all, takeLatest } from "redux-saga/effects";
-import { DECREMENT, LOGIN, DECREMENT_ASYNC, LOGIN_SUCCESS, LOGIN_FAIL } from "./types";
+import { DECREMENT, DECREMENT_ASYNC } from "./types";
 import { loginUser } from "../../userApi";
 
 function* decrementAsync() {
-    yield delay(1000);
-    yield put({ type: DECREMENT });
-}
-
-function* login() {
-    try {
-        const data = yield loginUser();
-        yield put({ type: LOGIN_SUCCESS, data });
-    } catch (e) {
-        yield put({ type: LOGIN_FAIL });
-    }
+  yield delay(1000);
+  yield put({ type: DECREMENT });
 }
 
 function* watchDecrementAsync() {
-    yield takeEvery(DECREMENT_ASYNC, decrementAsync);
-}
-
-function* watchLoginAsync() {
-    yield takeEvery(LOGIN, login);
+  yield takeEvery(DECREMENT_ASYNC, decrementAsync);
 }
 
 export default function* rootSaga() {
-    yield all([
-        watchDecrementAsync(),
-        watchLoginAsync()
-    ]);
+  yield all([watchDecrementAsync()]);
 }

@@ -1,4 +1,4 @@
-import { DECREMENT, LOGIN, LOGIN_SUCCESS, LOGIN_FAIL } from "./types";
+import { DECREMENT } from "./types";
 
 export interface Counter {
   count: number;
@@ -17,16 +17,6 @@ export default function counterReducer(
       return {
         ...state,
         count: state.count - 1
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        count: state.count + 5
-      };
-    case LOGIN_FAIL:
-      return {
-        ...state,
-        count: state.count + 7
       };
     default:
       return state;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import Login from "../components/Login";
-import * as CounterActions from "../redux/counter/actions";
+import * as LoginActions from "../redux/login/actions";
 import { connect } from "react-redux";
 import { Dispatch, AppState } from "../redux";
 
@@ -22,6 +22,6 @@ class LoginContainer extends Component<{} & DispatchProps, {}> {
 export default connect<{}, DispatchProps>(
   (state: AppState) => ({}),
   (dispatch: Dispatch) => ({
-    login: () => dispatch(CounterActions.login())
+    login: () => dispatch(LoginActions.login())
   })
 )(LoginContainer);
