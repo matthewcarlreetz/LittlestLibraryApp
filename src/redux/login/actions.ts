@@ -1,14 +1,16 @@
 import { LoginTypeKeys } from "./types";
-import { AuthData } from "../../models/user";
 
 export interface LoginAction {
   type: LoginTypeKeys.LOGIN;
-  data: AuthData;
+  payload: {
+    password: string;
+    email: string;
+  };
 }
 
-export function login(authData: AuthData): LoginAction {
+export function login(email: string, password: string): LoginAction {
   return {
     type: LoginTypeKeys.LOGIN,
-    data: authData
+    payload: { email, password }
   };
 }

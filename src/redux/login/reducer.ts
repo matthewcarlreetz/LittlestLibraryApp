@@ -1,44 +1,48 @@
 import { LoginTypeKeys } from "./types";
-import { Auth } from "../../models/user";
+import { UserData } from "../../models/user";
 
-export interface LoginState {
+export interface User {
   email: string;
-  password: string;
+  token: string;
+  loggedIn: boolean;
 }
 
 export interface SuccessAction {
   type: LoginTypeKeys.LOGIN_SUCCESS;
-  data: Auth;
+  payload: UserData;
 }
 
 export interface FailAction {
   type: LoginTypeKeys.LOGIN_FAIL;
-  data: Auth;
+  payload: UserData;
 }
 
 const initialState = {
   email: "",
-  password: ""
+  token: "",
+  loggedIn: false
 };
 
 export type ActionTypes = SuccessAction | FailAction;
 
-export default function counterReducer(
-  state: LoginState = initialState,
+export default function userReducer(
+  state: User = initialState,
   action: ActionTypes
-): LoginState {
+): User {
   switch (action.type) {
     case LoginTypeKeys.LOGIN_SUCCESS:
-      console.log("login succes", action.data.auth.email);
+      console.log("login success", action);
       return {
-        email: action.data.auth.email,
-        password: action.data.auth.password
+        email: action.payload.email,
+        token: action.payload.token,
+        loggedIn: true
       };
     case LoginTypeKeys.LOGIN_FAIL:
     default:
       return {
         email: "",
-        password: ""
+        token: "",
+        loggedIn: false
       };
   }
 }

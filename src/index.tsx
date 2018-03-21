@@ -9,8 +9,8 @@ import Counter from "./containers/Counter";
 import rootReducer from "./redux";
 import rootSaga from "./sagas";
 
-const sagaMiddleware = createSagaMiddleware(logger);
-const store = compose(applyMiddleware(sagaMiddleware))(createStore)(
+const sagaMiddleware = createSagaMiddleware();
+const store = compose(applyMiddleware(logger, sagaMiddleware))(createStore)(
   rootReducer
 );
 sagaMiddleware.run(rootSaga);

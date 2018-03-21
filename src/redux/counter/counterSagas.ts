@@ -1,7 +1,6 @@
 import { delay } from "redux-saga";
 import { put, takeEvery, all, takeLatest } from "redux-saga/effects";
 import { DECREMENT, DECREMENT_ASYNC } from "./types";
-import { loginUser } from "../../userApi";
 
 function* decrementAsync() {
   yield delay(1000);

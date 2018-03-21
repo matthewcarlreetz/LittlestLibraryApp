@@ -1,13 +1,13 @@
 import { delay } from "redux-saga";
 import { put, takeEvery, all, takeLatest } from "redux-saga/effects";
 import { LoginTypeKeys } from "./types";
-import { loginUser } from "../../userApi";
+import { loginUser } from "../../api/userApi";
 import { LoginAction } from "./actions";
 
 function* login(action: LoginAction) {
   try {
-    const data = yield loginUser(action.data.email, action.data.password);
-    yield put({ type: LoginTypeKeys.LOGIN_SUCCESS, data });
+    const payload = yield loginUser(action.payload.email, action.payload.password);
+    yield put({ type: LoginTypeKeys.LOGIN_SUCCESS, payload });
   } catch (e) {
     yield put({ type: LoginTypeKeys.LOGIN_FAIL });
   }

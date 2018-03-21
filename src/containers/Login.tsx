@@ -7,7 +7,7 @@ import { Dispatch, AppState } from "../redux";
 
 interface ConnectProps {
   email: string;
-  password: string;
+  showSuccess: boolean;
 }
 
 interface DispatchProps {
@@ -15,10 +15,6 @@ interface DispatchProps {
 }
 
 class LoginContainer extends Component<ConnectProps & DispatchProps, {}> {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return <Login {...this.props} />;
   }
@@ -26,11 +22,11 @@ class LoginContainer extends Component<ConnectProps & DispatchProps, {}> {
 
 export default connect<ConnectProps, DispatchProps>(
   (state: AppState) => ({
-    email: state.auth.email,
-    password: state.auth.password
+    email: state.user.email,
+    showSuccess: state.user.loggedIn
   }),
   (dispatch: Dispatch) => ({
     login: (email: string, password: string) =>
-      dispatch(LoginActions.login({ email, password }))
+      dispatch(LoginActions.login(email, password))
   })
 )(LoginContainer);

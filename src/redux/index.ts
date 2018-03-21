@@ -1,19 +1,18 @@
 import { combineReducers } from "redux";
 import counter, { Counter } from "./counter/reducer";
-import auth from "./login/reducer";
+import user, { User } from "./login/reducer";
 import { Dispatch as ReduxDispatch } from "redux";
-import { AuthData } from "../models/user";
 
 export interface AppState {
   counter: Counter;
-  auth: AuthData;
+  user: User;
 }
 
 export type Dispatch = ReduxDispatch<AppState>;
 
 const appReducer = combineReducers<AppState>({
   counter,
-  auth
+  user
 });
 
 const rootReducer = (state, action) => {

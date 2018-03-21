@@ -14,7 +14,12 @@ export interface UserInfo {
   user: number;
 }
 
-export interface AuthData {
-  password: string;
+export interface Token {
+  token: string;
+  expires: string;
+}
+
+export interface UserData {
+  token: string;
   email: string;
 }
