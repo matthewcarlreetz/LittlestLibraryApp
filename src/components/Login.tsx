@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Image } from "react-native";
 import { StyleProvider } from "native-base";
 import getTheme from "../../native-base-theme/components/index";
 import platform from "../../native-base-theme/variables/platform";
@@ -47,7 +47,7 @@ export default class LoginComponent extends Component<Props, State> {
         <StyleProvider style={getTheme(platform)}>
           <Container>
             <Content style={styles.content}>
-              <Icon style={styles.bookIcon} name="book" />
+              <Image source={require("../../assets/books.png")} style={styles.bookIcon} />
               <H1 style={{ fontWeight: "bold" }}>Littlest Library</H1>
               <Text style={styles.shareText}>Share the love!</Text>
               <Form>
@@ -104,7 +104,9 @@ const styles = StyleSheet.create({
     marginTop: 48
   },
   bookIcon: {
-    marginBottom: 64
+    marginBottom: 48,
+    height: 64,
+    width: 64
   },
   shareText: { marginBottom: 40, marginTop: 0, paddingTop: 8 },
   item: { marginRight: 16, marginLeft: 0, paddingTop: 16 },
