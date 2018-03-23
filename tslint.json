@@ -33,7 +33,8 @@
     ],
     "no-console": false,
     "jsx-boolean-value": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "no-angle-bracket-type-assertion": false
   },
   "rulesDirectory": []
 }
