@@ -15,6 +15,7 @@ interface DispatchProps {
 }
 
 class LoginContainer extends Component<ConnectProps & DispatchProps, {}> {
+
   render() {
     return <Login {...this.props} />;
   }

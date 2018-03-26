@@ -1,5 +1,6 @@
 import { addNavigationHelpers, StackNavigator, TabNavigator } from "react-navigation";
 import LoginScreen from "../containers/Login";
+import LibraryList from "../containers/LibraryList";
 import CounterScreen from "../containers/Counter";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -17,7 +18,7 @@ interface INavigatorHostProps {
 
 const Tabs = TabNavigator({
     LibraryList: {
-        screen: CounterScreen,
+        screen: LibraryList,
     },
     LibraryMap: {
         screen: CounterScreen,

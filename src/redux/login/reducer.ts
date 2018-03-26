@@ -38,11 +38,12 @@ export default function userReducer(
         loggedIn: true
       };
     case LoginTypeKeys.LOGIN_FAIL:
-    default:
       return {
         email: "",
         token: "",
         loggedIn: false
       };
+    default:
+      return state;
   }
 }
