@@ -1,22 +1,37 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Button from "./Button";
 import { Library } from "../models/library";
+import { Container, Content, List, ListItem, Left, Thumbnail, Body, Right, Text, Spinner, Header, Title } from "native-base";
 
 interface Props {
     libraries: [Library];
 }
 
-interface State {
-    libraries: [Library];
-}
-
-export default class LibraryList extends Component<Props, State> {
+export default class LibraryList extends Component<Props, {}> {
     render() {
         return (
-            <View>
-                <Text>{this.props.libraries ? this.props.libraries[0].address : "no libraries"}</Text>
-            </View>
+            <Container>
+                <Header>
+                    <Body>
+                        <Title>Libraries</Title>
+                    </Body>
+                </Header>
+                <Content>
+                    {this.props.libraries && this.props.libraries.length > 0 ?
+                        <List dataArray={this.props.libraries} renderRow={(item: Library) =>
+                            <ListItem avatar style={{ height: 80 }}>
+                                <Left>
+                                    <Thumbnail source={require("../../assets/library.jpg")} />
+                                </Left>
+                                <Body>
+                                    <Text>{item.address}</Text>
+                                    <Text note>{item.city} {item.state}  {item.zip}</Text>
+                                </Body>
+                            </ListItem>} />
+                        : <Spinner />}
+                </Content>
+            </Container>
         );
     }
 }
