@@ -7,36 +7,41 @@ import { Dispatch, AppState } from "../redux";
 import { Library } from "../models/library";
 
 interface ConnectProps {
-    libraries: [Library];
-    token: string;
+  libraries: [Library];
+  token: string;
 }
 
 interface DispatchProps {
-    loadLibraries: (token: string) => any;
+  loadLibraries: (token: string) => any;
+  showDetail: (library: Library) => any;
 }
 
-class LibraryListContainer extends Component<ConnectProps & DispatchProps, AppState> {
+class LibraryListContainer extends Component<
+  ConnectProps & DispatchProps,
+  AppState
+> {
+  constructor(props) {
+    super(props);
+  }
 
-    constructor(props) {
-        super(props);
-    }
+  componentDidMount() {
+    this.props.loadLibraries(this.props.token);
+  }
 
-    componentDidMount() {
-        this.props.loadLibraries(this.props.token);
-    }
-
-    render() {
-        return <LibraryList {...this.props} />;
-    }
+  render() {
+    return <LibraryList {...this.props} />;
+  }
 }
 
 export default connect<ConnectProps, DispatchProps>(
-    (state: AppState) => ({
-        token: state.user.token,
-        libraries: state.libraries.libraries
-    }),
-    (dispatch: Dispatch) => ({
-        loadLibraries: (token: string) =>
-            dispatch(LibraryActions.getLibraries(token))
-    })
+  (state: AppState) => ({
+    token: state.user.token,
+    libraries: state.libraries.libraries
+  }),
+  (dispatch: Dispatch) => ({
+    loadLibraries: (token: string) =>
+      dispatch(LibraryActions.getLibraries(token)),
+    showDetail: (library: Library) =>
+      dispatch(LibraryActions.showDetail(library))
+  })
 )(LibraryListContainer);

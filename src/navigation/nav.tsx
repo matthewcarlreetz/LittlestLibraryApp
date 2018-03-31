@@ -1,4 +1,8 @@
-import { addNavigationHelpers, StackNavigator, TabNavigator } from "react-navigation";
+import {
+  addNavigationHelpers,
+  StackNavigator,
+  TabNavigator
+} from "react-navigation";
 import LoginScreen from "../containers/Login";
 import LibraryList from "../containers/LibraryList";
 import CounterScreen from "../containers/Counter";
@@ -9,53 +13,62 @@ import { NavigationScreenProps } from "react-navigation";
 import { AppState } from "../redux";
 import { addListener } from "../index";
 
-interface INavigationScreenProps extends NavigationScreenProps<{}> { }
+interface INavigationScreenProps extends NavigationScreenProps<{}> {}
 
 interface INavigatorHostProps {
-    nav: any;
-    dispatch: any;
+  nav: any;
+  dispatch: any;
 }
 
 const Tabs = TabNavigator({
-    LibraryList: {
-        screen: LibraryList,
-    },
-    LibraryMap: {
-        screen: CounterScreen,
-    },
+  LibraryList: {
+    screen: LibraryList
+  },
+  LibraryMap: {
+    screen: CounterScreen
+  }
+});
+
+export const HomeStack = StackNavigator({
+  Tabs: {
+    screen: Tabs
+  },
+  Detail: {
+    screen: CounterScreen
+  }
 });
 
 export const MainStack = StackNavigator(
-    {
-        Login: {
-            screen: LoginScreen,
-        },
-        Main: {
-            screen: Tabs,
-        },
+  {
+    Login: {
+      screen: LoginScreen
     },
-    {
-        mode: "modal",
-        headerMode: "none",
+    Main: {
+      screen: HomeStack
     }
+  },
+  {
+    mode: "modal",
+    headerMode: "none"
+  }
 );
 
 class RootNavigatorHost extends React.PureComponent<INavigatorHostProps> {
-    constructor(props: INavigatorHostProps) {
-        super(props);
-    }
+  constructor(props: INavigatorHostProps) {
+    super(props);
+  }
 
-    public render() {
-        const navigation = addNavigationHelpers({
-            dispatch: this.props.dispatch,
-            state: this.props.nav,
-            addListener
-        });
-        return <MainStack navigation={navigation} />;
-    }
+  public render() {
+    const navigation = addNavigationHelpers({
+      dispatch: this.props.dispatch,
+      state: this.props.nav,
+      addListener
+    });
+    return <MainStack navigation={navigation} />;
+  }
 }
 const mapStateToAppNavProps = (state: AppState) => ({
-    nav: state.nav,
+  nav: state.nav
 });
 
 export default connect(mapStateToAppNavProps)(RootNavigatorHost);
