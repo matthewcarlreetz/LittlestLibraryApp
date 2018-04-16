@@ -32,6 +32,8 @@
       false
     ],
     "no-console": false,
+    "no-empty": false,
+    "no-empty-interface": false,
     "jsx-boolean-value": false,
     "jsx-no-lambda": false,
     "no-angle-bracket-type-assertion": false,

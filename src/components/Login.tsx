@@ -57,13 +57,15 @@ export default class LoginComponent extends Component<Props, State> {
                     autoCapitalize="none"
                     autoCorrect={false}
                     keyboardType="email-address"
-                    value={this.state.email}
+                    // value={this.state.email}
+                    value={"matt.reetz@zymo.io"}
                     onChangeText={text => this.setState({ email: text })}
                   />
                 </Item>
                 <Item floatingLabel style={styles.item}>
                   <Label>Password</Label>
                   <Input
+                    value={"abcd1234"}
                     secureTextEntry
                     onChangeText={text => this.setState({ password: text })}
                   />

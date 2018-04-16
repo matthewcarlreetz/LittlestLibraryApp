@@ -5,6 +5,7 @@ import {
 } from "react-navigation";
 import LoginScreen from "../containers/Login";
 import LibraryList from "../containers/LibraryList";
+import LibraryDetail from "../containers/LibraryDetail";
 import CounterScreen from "../containers/Counter";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -13,7 +14,7 @@ import { NavigationScreenProps } from "react-navigation";
 import { AppState } from "../redux";
 import { addListener } from "../index";
 
-interface INavigationScreenProps extends NavigationScreenProps<{}> {}
+interface INavigationScreenProps extends NavigationScreenProps<{}> { }
 
 interface INavigatorHostProps {
   nav: any;
@@ -34,7 +35,7 @@ export const HomeStack = StackNavigator({
     screen: Tabs
   },
   Detail: {
-    screen: CounterScreen
+    screen: LibraryDetail
   }
 });
 

@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import nav, { Nav } from "../navigation/reducer";
+import nav, { Nav } from "./navigation/reducer";
 import counter, { Counter } from "./counter/reducer";
 import user, { User } from "./login/reducer";
 import libraries, { Libraries } from "./library/reducer";
