@@ -8,6 +8,12 @@ export interface LibraryAction {
   };
 }
 
+export interface LibraryAddAction {
+  type: LibraryKeys.ADD_LIBRARY;
+  payload: {
+  };
+}
+
 export interface LibraryDetailAction {
   type: LibraryKeys.SHOW_LIBRARY_DETAIL;
   payload: {
@@ -26,5 +32,12 @@ export function showDetail(library: Library): LibraryDetailAction {
   return {
     type: LibraryKeys.SHOW_LIBRARY_DETAIL,
     payload: { library }
+  };
+}
+
+export function addLibrary(): LibraryAddAction {
+  return {
+    type: LibraryKeys.ADD_LIBRARY,
+    payload: {}
   };
 }

@@ -5,6 +5,7 @@ import {
 } from "react-navigation";
 import LoginScreen from "../containers/Login";
 import LibraryList from "../containers/LibraryList";
+import AddLibrary from "../containers/AddLibrary";
 import LibraryDetail from "../containers/LibraryDetail";
 import CounterScreen from "../containers/Counter";
 import { connect } from "react-redux";
@@ -36,6 +37,9 @@ export const HomeStack = StackNavigator({
   },
   Detail: {
     screen: LibraryDetail
+  },
+  Add: {
+    screen: AddLibrary
   }
 });
 

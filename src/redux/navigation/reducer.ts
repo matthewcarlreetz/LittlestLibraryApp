@@ -28,6 +28,12 @@ export default function nav(state = initialState, action) {
                 state
             );
             break;
+        case LibraryKeys.ADD_LIBRARY:
+            nextState = MainStack.router.getStateForAction(
+                NavigationActions.navigate({ routeName: "Add" }),
+                state
+            );
+            break;
         default:
             nextState = MainStack.router.getStateForAction(action, state);
             break;

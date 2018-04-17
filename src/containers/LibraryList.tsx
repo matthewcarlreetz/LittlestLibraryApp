@@ -1,14 +1,17 @@
 import React, { Component } from "react";
+import { Button, Icon } from "native-base";
 import { bindActionCreators } from "redux";
 import * as LibraryActions from "../redux/library/actions";
 import LibraryList from "../components/LibraryList";
 import { connect } from "react-redux";
 import { Dispatch, AppState } from "../redux";
 import { Library } from "../models/library";
+import ButtonForAdd from "../components/ButtonForAdd";
 
 interface ConnectProps {
   libraries: [Library];
   token: string;
+  navigation: any;
 }
 
 interface DispatchProps {
@@ -16,12 +19,11 @@ interface DispatchProps {
   showDetail: (library: Library) => any;
 }
 
-class LibraryListContainer extends Component<
-  ConnectProps & DispatchProps,
-  AppState
-> {
-  constructor(props) {
-    super(props);
+class LibraryListContainer extends Component<ConnectProps & DispatchProps, AppState> {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: <ButtonForAdd />
+    };
   }
 
   componentDidMount() {
@@ -36,7 +38,8 @@ class LibraryListContainer extends Component<
 export default connect<ConnectProps, DispatchProps>(
   (state: AppState) => ({
     token: state.user.token,
-    libraries: state.libraries.libraries
+    libraries: state.libraries.libraries,
+    navigation: state.nav
   }),
   (dispatch: Dispatch) => ({
     loadLibraries: (token: string) =>
