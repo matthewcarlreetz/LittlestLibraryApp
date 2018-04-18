@@ -9,6 +9,7 @@ function* login(action: LoginAction) {
     const payload = yield loginUser(action.payload.email, action.payload.password);
     yield put({ type: LoginTypeKeys.LOGIN_SUCCESS, payload });
   } catch (e) {
+    console.log(e);
     yield put({ type: LoginTypeKeys.LOGIN_FAIL });
   }
 }

@@ -22,7 +22,13 @@ interface DispatchProps {
 class LibraryListContainer extends Component<ConnectProps & DispatchProps, AppState> {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerRight: <ButtonForAdd />
+      headerRight: <ButtonForAdd />,
+      title: "Littlest Library",
+      headerStyle: { backgroundColor: "rgb(45,54,64)" },
+      headerTitleStyle: {
+        color: "#ffffff"
+      },
+      headerTintColor: "#ffffff",
     };
   }
 

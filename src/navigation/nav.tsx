@@ -1,8 +1,10 @@
 import {
   addNavigationHelpers,
   StackNavigator,
-  TabNavigator
+  TabNavigator,
+  NavigationActions
 } from "react-navigation";
+import { BackHandler } from "react-native";
 import LoginScreen from "../containers/Login";
 import LibraryList from "../containers/LibraryList";
 import AddLibrary from "../containers/AddLibrary";
@@ -54,13 +56,31 @@ export const MainStack = StackNavigator(
   },
   {
     mode: "modal",
-    headerMode: "none"
-  }
+    headerMode: "none",
+    backBehavior: "none"
+  },
 );
 
 class RootNavigatorHost extends React.PureComponent<INavigatorHostProps> {
   constructor(props: INavigatorHostProps) {
     super(props);
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+  }
+
+  onBackPress = () => {
+    const { dispatch, nav } = this.props;
+    if (nav.index === 0) {
+      return false;
+    }
+    dispatch(NavigationActions.back());
+    return true;
   }
 
   public render() {

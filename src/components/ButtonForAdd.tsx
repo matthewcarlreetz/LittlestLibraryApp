@@ -11,8 +11,9 @@ interface DispatchProps {
 class ButtonForAdd extends Component<{} & DispatchProps, AppState> {
     render() {
         return (
-            <Button transparent primary
-                onPress={() => this.props.addLibrary()} >
+            < Button transparent light
+                onPress={() => this.props.addLibrary()
+                } >
                 <Icon name="add" />
             </Button >
         );
