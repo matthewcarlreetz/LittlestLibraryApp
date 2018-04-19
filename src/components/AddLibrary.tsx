@@ -5,19 +5,31 @@ import { StyleProvider, Container, Content, Root } from "native-base";
 import getTheme from "../../native-base-theme/components/index";
 import platform from "../../native-base-theme/variables/platform";
 
-interface Props {
+export interface ConnectProps {
+    location: Position;
+    hasPermission: boolean;
+    askLocationPermission: () => any;
+    requestLocation: () => any;
 }
+
 interface State {
 }
 
-export default class LibraryDetail extends Component<Props, State> {
+export default class LibraryDetail extends Component<ConnectProps, State> {
     render() {
+        let location = "Add Library";
+        if (this.props.location != null) {
+            location = this.props.location.coords.latitude +
+                " <==> " + this.props.location.coords.longitude;
+        }
+
         return (
             <Root>
                 <StyleProvider style={getTheme(platform)}>
                     <Container>
                         <Content>
-                            <Text>Add</Text>
+                            <Text>{location}
+                            </Text>
                         </Content>
                     </Container>
 

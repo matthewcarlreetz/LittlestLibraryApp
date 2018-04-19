@@ -27,11 +27,10 @@ interface INavigatorHostProps {
 const Tabs = TabNavigator({
   LibraryList: {
     screen: LibraryList
+  },
+  LibraryMap: {
+    screen: LibraryList
   }
-  // ,
-  // LibraryMap: {
-  //   screen:
-  // }
 });
 
 export const HomeStack = StackNavigator(

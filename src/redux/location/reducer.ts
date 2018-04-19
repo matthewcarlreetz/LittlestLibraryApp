@@ -1,5 +1,5 @@
-import { LocationKeys, PermissionAction, LocationAction, LLLocation } from "./types";
-export type ActionTypes = PermissionAction | LocationAction;
+import { LocationKeys, PermissionResponseAction, LocationFoundAction, LLLocation } from "./types";
+export type ActionTypes = PermissionResponseAction | LocationFoundAction;
 
 const initialState = {
   hasPermission: false,
@@ -11,7 +11,8 @@ export default function locationReducer(
   action: ActionTypes
 ): LLLocation {
   switch (action.type) {
-    case LocationKeys.PERMISSION:
+    case LocationKeys.PERMISSION_RESPONSE:
+      console.log("updating location permission to " + action.payload);
       return {
         ...state,
         hasPermission: action.payload

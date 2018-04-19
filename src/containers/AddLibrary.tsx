@@ -2,24 +2,34 @@ import React, { Component } from "react";
 import AddLibrary from "../components/AddLibrary";
 import { connect } from "react-redux";
 import { Dispatch, AppState } from "../redux/types";
+import * as LocationActions from "../redux/location/actions";
 import Permissions from "react-native-permissions";
 
-interface ConnectProps {
+export interface ConnectProps {
     location: Position;
+    hasPermission: boolean;
 }
 
 interface DispatchProps {
+    askLocationPermission: () => any;
+    requestLocation: () => any;
 }
 
-class LibraryListContainer extends Component<ConnectProps & DispatchProps, AppState> {
-    componentDidMount() {
+class AddLibraryContainer extends Component<ConnectProps & DispatchProps, AppState> {
+    componentWillReceiveProps(nextProps) {
+        if (!nextProps.hasPermission) {
+            this.props.askLocationPermission();
+        } else {
+            this.props.requestLocation();
+        }
+    }
 
-        Permissions.check("location").then(response => {
-            console.log(response);
-            navigator.geolocation.getCurrentPosition(location => {
-                console.log(location);
-            });
-        });
+    componentDidMount() {
+        if (!this.props.hasPermission) {
+            this.props.askLocationPermission();
+        } else {
+            this.props.requestLocation();
+        }
     }
 
     render() {
@@ -29,8 +39,13 @@ class LibraryListContainer extends Component<ConnectProps & DispatchProps, AppSt
 
 export default connect<ConnectProps, DispatchProps>(
     (state: AppState) => ({
-        location: null
+        location: state.location.latestLocation,
+        hasPermission: state.location.hasPermission
     }),
     (dispatch: Dispatch) => ({
+        askLocationPermission: () =>
+            dispatch(LocationActions.askPermission()),
+        requestLocation: () =>
+            dispatch(LocationActions.requestLocation())
     })
-)(LibraryListContainer);
+)(AddLibraryContainer);
