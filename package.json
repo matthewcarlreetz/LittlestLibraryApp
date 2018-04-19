@@ -15,6 +15,7 @@
     "native-base": "^2.3.10",
     "react": "^16.3.0-alpha.1",
     "react-native": "0.55.3",
+    "react-native-permissions": "^1.1.1",
     "react-navigation": "^1.5.8",
     "react-navigation-redux-helpers": "^1.0.3",
     "react-redux": "^5.0.7",
@@ -24,8 +25,8 @@
   },
   "devDependencies": {
     "@types/react": "^16.0.40",
-    "@types/react-native": "^0.52.16",
-    "@types/react-redux": "^5.0.15",
+    "@types/react-native": "^0.55.3",
+    "@types/react-redux": "^5.0.16",
     "babel-jest": "22.4.1",
     "babel-preset-react-native": "4.0.0",
     "husky": "^0.14.3",

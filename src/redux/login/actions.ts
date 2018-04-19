@@ -1,12 +1,4 @@
-import { LoginTypeKeys } from "./types";
-
-export interface LoginAction {
-  type: LoginTypeKeys.LOGIN;
-  payload: {
-    password: string;
-    email: string;
-  };
-}
+import { LoginTypeKeys, LoginAction } from "./types";
 
 export function login(email: string, password: string): LoginAction {
   return {

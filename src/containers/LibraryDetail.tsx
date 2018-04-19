@@ -3,8 +3,8 @@ import { bindActionCreators } from "redux";
 import * as LibraryActions from "../redux/library/actions";
 import LibraryDetail from "../components/LibraryDetail";
 import { connect } from "react-redux";
-import { Dispatch, AppState } from "../redux";
-import { Library } from "../models/library";
+import { Dispatch, AppState } from "../redux/types";
+import { Library } from "../redux/library/types";
 
 interface ConnectProps {
     library: Library;

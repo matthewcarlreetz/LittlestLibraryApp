@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Icon } from "native-base";
 import { connect } from "react-redux";
-import { Dispatch, AppState } from "../redux";
+import { Dispatch, AppState } from "../redux/types";
 import * as LibraryActions from "../redux/library/actions";
 
 interface DispatchProps {

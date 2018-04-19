@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { StyleProvider, Fab, Icon, Button } from "native-base";
-import { Library } from "../models/library";
+import { Library } from "../redux/library/types";
 import { Container, Content, Body, Root, Text, H1, ActionSheet } from "native-base";
 import getTheme from "../../native-base-theme/components/index";
 import platform from "../../native-base-theme/variables/platform";
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     divider: {
         height: 1,
         flex: 1,
-        backgroundColor: "rgba(45,54,64, 0.3)"
+        backgroundColor: "rgba(45, 54, 64, 0.3)"
     },
     city: {
         fontSize: 12

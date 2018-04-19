@@ -1,2 +1,0 @@
-export const DECREMENT = "DECREMENT";
-export const DECREMENT_ASYNC = "DECREMENT_ASYNC";

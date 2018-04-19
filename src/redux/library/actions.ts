@@ -1,25 +1,4 @@
-import { LibraryKeys } from "./types";
-import { Library } from "../../models/library";
-
-export interface LibraryAction {
-  type: LibraryKeys.GET_LIBRARIES;
-  payload: {
-    token: string;
-  };
-}
-
-export interface LibraryAddAction {
-  type: LibraryKeys.ADD_LIBRARY;
-  payload: {
-  };
-}
-
-export interface LibraryDetailAction {
-  type: LibraryKeys.SHOW_LIBRARY_DETAIL;
-  payload: {
-    library: Library;
-  };
-}
+import { LibraryKeys, Libraries, LibraryAction, SelectLibraryAction, LibraryAddAction, Library } from "./types";
 
 export function getLibraries(token: string): LibraryAction {
   return {
@@ -28,7 +7,7 @@ export function getLibraries(token: string): LibraryAction {
   };
 }
 
-export function showDetail(library: Library): LibraryDetailAction {
+export function showDetail(library: Library): SelectLibraryAction {
   return {
     type: LibraryKeys.SHOW_LIBRARY_DETAIL,
     payload: { library }

@@ -1,14 +1,9 @@
-import { LoginTypeKeys } from "../../redux/login/types";
-import { UserData } from "../../models/user";
-import { LibraryKeys } from "../../redux/library/types";
+import { LoginTypeKeys, UserData } from "../login/types";
+import { LibraryKeys } from "../library/types";
 import React from "react";
 import { connect } from "react-redux";
 import { addNavigationHelpers, StackNavigator, NavigationActions } from "react-navigation";
 import { MainStack } from "../../navigation/nav";
-
-export interface Nav {
-    routes: any[];
-}
 
 const initialState = MainStack.router.getStateForAction(MainStack.router.getActionForPathAndParams("Login"));
 

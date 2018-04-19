@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import AddLibrary from "../components/AddLibrary";
 import { connect } from "react-redux";
-import { Dispatch, AppState } from "../redux";
+import { Dispatch, AppState } from "../redux/types";
+import Permissions from "react-native-permissions";
 
 interface ConnectProps {
     location: Position;
@@ -12,9 +13,12 @@ interface DispatchProps {
 
 class LibraryListContainer extends Component<ConnectProps & DispatchProps, AppState> {
     componentDidMount() {
-        navigator.geolocation.getCurrentPosition(location => {
-            console.log(location);
-            // need to create a redux store for location
+
+        Permissions.check("location").then(response => {
+            console.log(response);
+            navigator.geolocation.getCurrentPosition(location => {
+                console.log(location);
+            });
         });
     }
 

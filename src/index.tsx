@@ -3,7 +3,7 @@ import { compose, createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
-
+import { AppState } from "./redux/types";
 import RootNavigatorContainer from "./navigation/nav";
 import rootReducer from "./redux";
 import rootSaga from "./sagas";
@@ -14,7 +14,7 @@ import {
 
 const reduxMiddleware = createReactNavigationReduxMiddleware(
   "root",
-  (state) => state.nav,
+  (state) => (state as AppState).nav
 );
 
 export const addListener = createReduxBoundAddListener("root");

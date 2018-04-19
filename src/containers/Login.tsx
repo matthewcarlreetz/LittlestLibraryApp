@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import Login from "../components/Login";
 import * as LoginActions from "../redux/login/actions";
 import { connect } from "react-redux";
-import { Dispatch, AppState } from "../redux";
+import { Dispatch, AppState } from "../redux/types";
 
 interface ConnectProps {
   email: string;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text } from "react-native";
-import { Library } from "../models/library";
+import { Library } from "../redux/library/types";
 import { StyleProvider, Container, Content, Root } from "native-base";
 import getTheme from "../../native-base-theme/components/index";
 import platform from "../../native-base-theme/variables/platform";

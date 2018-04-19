@@ -9,13 +9,13 @@ import LoginScreen from "../containers/Login";
 import LibraryList from "../containers/LibraryList";
 import AddLibrary from "../containers/AddLibrary";
 import LibraryDetail from "../containers/LibraryDetail";
-import CounterScreen from "../containers/Counter";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import React from "react";
 import { NavigationScreenProps } from "react-navigation";
-import { AppState } from "../redux";
+import { AppState } from "../redux/types";
 import { addListener } from "../index";
+import platform from "../../native-base-theme/variables/platform";
 
 interface INavigationScreenProps extends NavigationScreenProps<{}> { }
 
@@ -27,23 +27,34 @@ interface INavigatorHostProps {
 const Tabs = TabNavigator({
   LibraryList: {
     screen: LibraryList
-  },
-  LibraryMap: {
-    screen: CounterScreen
   }
+  // ,
+  // LibraryMap: {
+  //   screen:
+  // }
 });
 
-export const HomeStack = StackNavigator({
-  Tabs: {
-    screen: Tabs
+export const HomeStack = StackNavigator(
+  {
+    Tabs: {
+      screen: Tabs
+    },
+    Detail: {
+      screen: LibraryDetail
+    },
+    Add: {
+      screen: AddLibrary
+    }
   },
-  Detail: {
-    screen: LibraryDetail
-  },
-  Add: {
-    screen: AddLibrary
-  }
-});
+  {
+    navigationOptions: {
+      headerStyle: { backgroundColor: platform.brandDark },
+      headerTitleStyle: {
+        color: "#ffffff"
+      },
+      headerTintColor: "#ffffff",
+    }
+  });
 
 export const MainStack = StackNavigator(
   {

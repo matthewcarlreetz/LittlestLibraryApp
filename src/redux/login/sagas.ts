@@ -2,7 +2,7 @@ import { delay } from "redux-saga";
 import { put, takeEvery, all, takeLatest } from "redux-saga/effects";
 import { LoginTypeKeys } from "./types";
 import { loginUser } from "../../api/userApi";
-import { LoginAction } from "./actions";
+import { LoginAction } from "./types";
 
 function* login(action: LoginAction) {
   try {

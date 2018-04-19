@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { Library } from "../models/library";
+import { Library } from "../redux/library/types";
 import {
     Container, Content, List, ListItem, Left, Thumbnail, Body,
     Right, Text, Spinner, Header, Title

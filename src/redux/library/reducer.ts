@@ -1,26 +1,4 @@
-import { LibraryKeys } from "./types";
-import { Library } from "../../models/library";
-
-export interface Libraries {
-    libraries: [Library];
-    error: string;
-    selectedLibrary: Library;
-}
-
-export interface SuccessAction {
-    type: LibraryKeys.GET_LIBRARY_SUCCESS;
-    payload: Libraries;
-}
-
-export interface FailAction {
-    type: LibraryKeys.GET_LIBRARY_FAIL;
-    payload: Libraries;
-}
-
-export interface SelectAction {
-    type: LibraryKeys.SHOW_LIBRARY_DETAIL;
-    payload: { library: Library };
-}
+import { LibraryKeys, Library, SuccessAction, FailAction, SelectLibraryAction, Libraries } from "./types";
 
 const initialState = {
     libraries: null,
@@ -28,7 +6,7 @@ const initialState = {
     error: "",
 };
 
-export type ActionTypes = SuccessAction | FailAction | SelectAction;
+export type ActionTypes = SuccessAction | FailAction | SelectLibraryAction;
 
 export default function userReducer(
     state: Libraries = initialState,

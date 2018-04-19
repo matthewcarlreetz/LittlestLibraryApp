@@ -1,8 +1,7 @@
 import { delay } from "redux-saga";
 import { put, takeEvery, all, takeLatest } from "redux-saga/effects";
-import { LibraryKeys } from "./types";
+import { LibraryKeys, LibraryAction } from "./types";
 import { fetchLibraries } from "../../api/libraryApi";
-import { LibraryAction } from "./actions";
 
 function* getLibraries(action: LibraryAction) {
     try {

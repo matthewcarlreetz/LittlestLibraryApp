@@ -4,8 +4,8 @@ import { bindActionCreators } from "redux";
 import * as LibraryActions from "../redux/library/actions";
 import LibraryList from "../components/LibraryList";
 import { connect } from "react-redux";
-import { Dispatch, AppState } from "../redux";
-import { Library } from "../models/library";
+import { Dispatch, AppState } from "../redux/types";
+import { Library } from "../redux/library/types";
 import ButtonForAdd from "../components/ButtonForAdd";
 
 interface ConnectProps {
@@ -23,12 +23,7 @@ class LibraryListContainer extends Component<ConnectProps & DispatchProps, AppSt
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: <ButtonForAdd />,
-      title: "Littlest Library",
-      headerStyle: { backgroundColor: "rgb(45,54,64)" },
-      headerTitleStyle: {
-        color: "#ffffff"
-      },
-      headerTintColor: "#ffffff",
+      title: "Littlest Library"
     };
   }
 

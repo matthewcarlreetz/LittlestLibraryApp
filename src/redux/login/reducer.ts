@@ -1,21 +1,4 @@
-import { LoginTypeKeys } from "./types";
-import { UserData } from "../../models/user";
-
-export interface User {
-  email: string;
-  token: string;
-  loggedIn: boolean;
-}
-
-export interface SuccessAction {
-  type: LoginTypeKeys.LOGIN_SUCCESS;
-  payload: UserData;
-}
-
-export interface FailAction {
-  type: LoginTypeKeys.LOGIN_FAIL;
-  payload: UserData;
-}
+import { LoginTypeKeys, UserData, SuccessAction, FailAction, User } from "./types";
 
 const initialState = {
   email: "",
