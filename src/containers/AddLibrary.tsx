@@ -19,7 +19,7 @@ class AddLibraryContainer extends Component<ConnectProps & DispatchProps, AppSta
     componentWillReceiveProps(nextProps) {
         if (!nextProps.hasPermission) {
             this.props.askLocationPermission();
-        } else {
+        } else if (!nextProps.location) {
             this.props.requestLocation();
         }
     }
