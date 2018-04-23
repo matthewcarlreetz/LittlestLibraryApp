@@ -8,6 +8,7 @@ import { Dispatch, AppState } from "../redux/types";
 interface ConnectProps {
   email: string;
   showSuccess: boolean;
+  loading: boolean;
 }
 
 interface DispatchProps {
@@ -24,7 +25,8 @@ class LoginContainer extends Component<ConnectProps & DispatchProps, {}> {
 export default connect<ConnectProps, DispatchProps>(
   (state: AppState) => ({
     email: state.user.email,
-    showSuccess: state.user.loggedIn
+    showSuccess: state.user.loggedIn,
+    loading: state.ui.loading
   }),
   (dispatch: Dispatch) => ({
     login: (email: string, password: string) =>

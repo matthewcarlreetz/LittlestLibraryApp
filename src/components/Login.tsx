@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image } from "react-native";
 import { StyleProvider } from "native-base";
 import getTheme from "../../native-base-theme/components/index";
 import platform from "../../native-base-theme/variables/platform";
+import LLButton from "./LLButton";
 import {
   Container, Header, Content, Form, Item, Input, Label, Icon, Button, H1, H3, Toast, Root
 } from "native-base";
@@ -11,6 +12,7 @@ interface Props {
   email: string;
   showSuccess: boolean;
   login: (email: string, password: string) => any;
+  loading: boolean;
 }
 
 interface State {
@@ -24,21 +26,6 @@ export default class LoginComponent extends Component<Props, State> {
     this.state = {
       email: this.props.email, password: ""
     };
-  }
-
-  showSuccessToast() {
-    Toast.show({
-      text: "Logged In!",
-      position: "bottom",
-      buttonText: "Okay"
-    });
-  }
-
-  componentDidUpdate() {
-    if (this.props.showSuccess) {
-      console.log("logged in!");
-      this.showSuccessToast();
-    }
   }
 
   render() {
@@ -83,14 +70,12 @@ export default class LoginComponent extends Component<Props, State> {
                   </Button>
                 </View>
               </View>
-              <Button
-                onPress={e => this.props.login(this.state.email, this.state.password)}
+              <LLButton
+                onPress={() => this.props.login(this.state.email, this.state.password)}
+                text="Login"
                 style={styles.button}
-                dark
-                block
-              >
-                <Text style={styles.textContent}>Login</Text>
-              </Button>
+                disabled={this.props.loading}
+              />
             </Content>
           </Container>
         </StyleProvider>
@@ -119,8 +104,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end"
   },
   button: {
-    borderRadius: 2,
-    height: 64,
     margin: 16,
     marginTop: 48
   },

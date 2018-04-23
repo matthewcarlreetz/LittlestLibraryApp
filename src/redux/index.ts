@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import nav from "./navigation/reducer";
+import ui from "./ui/reducer";
 import libraries from "./library/reducer";
 import location from "./location/reducer";
 import user from "./login/reducer";
@@ -11,7 +12,8 @@ const appReducer = combineReducers<AppState>({
   nav,
   user,
   libraries,
-  location
+  location,
+  ui
 });
 
 const rootReducer = (state, action) => {

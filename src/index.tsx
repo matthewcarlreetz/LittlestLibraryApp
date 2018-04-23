@@ -12,6 +12,8 @@ import {
   createReactNavigationReduxMiddleware
 } from "react-navigation-redux-helpers";
 
+console.disableYellowBox = true;
+
 const reduxMiddleware = createReactNavigationReduxMiddleware(
   "root",
   (state) => (state as AppState).nav

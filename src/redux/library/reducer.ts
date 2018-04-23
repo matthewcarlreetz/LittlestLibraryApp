@@ -1,20 +1,22 @@
-import { LibraryKeys, Library, SuccessAction, FailAction, SelectLibraryAction, Libraries } from "./types";
+import { LibraryKeys, Library, SuccessAction, FailAction, SelectLibraryAction, Libraries, LibraryImageCapturedAction } from "./types";
 
 const initialState = {
     libraries: null,
     selectedLibrary: null,
     error: "",
+    libraryToAdd: {
+        imageData: null
+    }
 };
 
-export type ActionTypes = SuccessAction | FailAction | SelectLibraryAction;
+export type ActionTypes = SuccessAction | FailAction | SelectLibraryAction | LibraryImageCapturedAction;
 
-export default function userReducer(
+export default function libraryReducer(
     state: Libraries = initialState,
     action: ActionTypes
 ): Libraries {
     switch (action.type) {
         case LibraryKeys.GET_LIBRARY_SUCCESS:
-            console.log("login success", action);
             return {
                 ...state,
                 libraries: action.payload.libraries,
@@ -26,10 +28,16 @@ export default function userReducer(
                 error: action.payload.error
             };
         case LibraryKeys.SHOW_LIBRARY_DETAIL:
-            console.log("selectedLibrary", action.payload);
             return {
                 ...state,
                 selectedLibrary: action.payload.library
+            };
+        case LibraryKeys.IMAGE_CAPTURED:
+            return {
+                ...state,
+                libraryToAdd: {
+                    imageData: action.payload
+                }
             };
         default:
             return state;

@@ -1,4 +1,4 @@
-import { LibraryKeys, Libraries, LibraryAction, SelectLibraryAction, LibraryAddAction, Library } from "./types";
+import { LibraryKeys, Libraries, LibraryAction, SelectLibraryAction, LibraryAddAction, Library, LibraryImageCapturedAction, LibraryImageCaptureStartedAction } from "./types";
 
 export function getLibraries(token: string): LibraryAction {
   return {
@@ -17,6 +17,20 @@ export function showDetail(library: Library): SelectLibraryAction {
 export function addLibrary(): LibraryAddAction {
   return {
     type: LibraryKeys.ADD_LIBRARY,
+    payload: {}
+  };
+}
+
+export function imageCaptured(imageData: string): LibraryImageCapturedAction {
+  return {
+    type: LibraryKeys.IMAGE_CAPTURED,
+    payload: imageData
+  };
+}
+
+export function imageCaptureStarted(): LibraryImageCaptureStartedAction {
+  return {
+    type: LibraryKeys.IMAGE_CAPTURE_STARTED,
     payload: {}
   };
 }
