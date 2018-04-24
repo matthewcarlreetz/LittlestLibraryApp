@@ -48,6 +48,7 @@ export default class LibraryDetail extends Component<ConnectProps, State> {
                                 permissionDialogMessage={"We need your permission to use your camera phone"}
                             />
                             <View style={styles.userArea}>
+                                <Text style={styles.explanation}>An explanation of what to do</Text>
                                 <LLButton
                                     onPress={this.takePicture()}
                                     text="Capture"
@@ -90,5 +91,10 @@ const styles = StyleSheet.create({
         flex: 0,
         margin: 16,
         marginTop: 48
+    },
+    explanation: {
+        margin: 16,
+        alignItems: "center",
+        textAlign: "center"
     }
 });

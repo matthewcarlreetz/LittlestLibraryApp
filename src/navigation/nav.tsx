@@ -8,6 +8,7 @@ import { BackHandler } from "react-native";
 import LoginScreen from "../containers/Login";
 import LibraryList from "../containers/LibraryList";
 import AddLibrary from "../containers/AddLibrary";
+import ConfirmLibrary from "../containers/ConfirmLibrary";
 import LibraryDetail from "../containers/LibraryDetail";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -43,6 +44,9 @@ export const HomeStack = StackNavigator(
     },
     Add: {
       screen: AddLibrary
+    },
+    Confirm: {
+      screen: ConfirmLibrary
     }
   },
   {

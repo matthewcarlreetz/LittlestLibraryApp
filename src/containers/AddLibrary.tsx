@@ -20,6 +20,12 @@ interface DispatchProps {
 }
 
 class AddLibraryContainer extends Component<ConnectProps & DispatchProps, AppState> {
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: "Add"
+        };
+    }
+
     componentWillReceiveProps(nextProps) {
         if (!nextProps.hasPermission) {
             this.props.askLocationPermission();

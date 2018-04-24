@@ -29,6 +29,12 @@ export default function nav(state = initialState, action) {
                 state
             );
             break;
+        case LibraryKeys.IMAGE_CAPTURED:
+            nextState = MainStack.router.getStateForAction(
+                NavigationActions.navigate({ routeName: "Confirm" }),
+                state
+            );
+            break;
         default:
             nextState = MainStack.router.getStateForAction(action, state);
             break;

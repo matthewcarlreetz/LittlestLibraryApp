@@ -5,9 +5,9 @@ import * as ReactNative from "react-native";
 
 interface Props {
   text: string;
-  onPress: () => void;
+  onPress?: () => void;
   style?: ReactNative.ViewStyle;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export default class LLButton extends Component<Props, {}> {
