@@ -19,17 +19,17 @@ interface Props {
 interface State {
   email: string;
   password: string;
-  fadeOut: Animated.Value;
-  fadeIn: Animated.Value;
 }
 
 export default class LoginComponent extends Component<Props, State> {
-  private animationCheckedDone: any;
+  private animationCheckedDone: Animation;
+  private fadeOut = new Animated.Value(1);
+  private fadeIn = new Animated.Value(0);
 
   constructor(props) {
     super(props);
     this.state = {
-      email: this.props.email, password: "", fadeOut: new Animated.Value(1), fadeIn: new Animated.Value(0)
+      email: this.props.email, password: ""
     };
   }
 
@@ -39,13 +39,13 @@ export default class LoginComponent extends Component<Props, State> {
     }
 
     if (this.props.loading) {
-      Animated.timing(this.state.fadeOut, {
-        toValue: 0.5,
+      Animated.timing(this.fadeOut, {
+        toValue: this.props.loading ? 0.5 : 1,
         duration: 300,
       }).start();
 
-      Animated.timing(this.state.fadeIn, {
-        toValue: 1.0,
+      Animated.timing(this.fadeIn, {
+        toValue: this.props.loading ? 1.0 : 0,
         duration: 300,
       }).start();
     }
@@ -94,7 +94,7 @@ export default class LoginComponent extends Component<Props, State> {
                 </View>
               </View>
 
-              <Animated.View style={{ opacity: this.state.fadeOut }}>
+              <Animated.View style={{ opacity: this.fadeOut }}>
                 <LLButton
                   onPress={() => this.props.login(this.state.email, this.state.password)}
                   text="Login"
@@ -105,12 +105,12 @@ export default class LoginComponent extends Component<Props, State> {
               {
                 this.props.loading &&
                 <Animated.View style={{
-                  opacity: this.state.fadeIn,
+                  opacity: this.fadeIn,
                   width: 327,
                   height: 100, alignItems: "center", justifyContent: "center"
                 }}>
                   <Animation
-                    ref={(animation: any) => {
+                    ref={(animation: Animation) => {
                       this.animationCheckedDone = animation;
                     }}
                     loop={true}
