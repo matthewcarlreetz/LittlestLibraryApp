@@ -10,15 +10,18 @@ import {
 import Animation from "lottie-react-native";
 
 interface Props {
-  email: string;
-  showSuccess: boolean;
   login: (email: string, password: string) => any;
+  validate: (email: string, password: string) => any;
   loading: boolean;
+  emailError: string;
+  passwordError: string;
 }
 
 interface State {
   email: string;
   password: string;
+  // emailError: string;
+  // passwordError: string;
 }
 
 export default class LoginComponent extends Component<Props, State> {
@@ -29,7 +32,7 @@ export default class LoginComponent extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      email: this.props.email, password: ""
+      email: "", password: ""/*, emailError: "", passwordError: ""*/
     };
   }
 
@@ -51,12 +54,19 @@ export default class LoginComponent extends Component<Props, State> {
     }
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   console.log("componentWillReceiveProps");
+  //   this.setState({
+  //     email: "", password: "", emailError: nextProps.emailError, passwordError: nextProps.passwordError
+  //   });
+  // }
+
   render() {
     return (
       <Root>
         <StyleProvider style={getTheme(platform)}>
           <Container>
-            <View style={styles.content}>
+            <Content style={styles.content}>
               <Image source={require("../../assets/books.png")} style={styles.bookIcon} />
               <H1 style={{ fontWeight: "bold" }}>Littlest Library</H1>
               <Text style={styles.shareText}>Share the love!</Text>
@@ -65,21 +75,28 @@ export default class LoginComponent extends Component<Props, State> {
                   <Label>Email</Label>
                   <Input
                     autoCapitalize="none"
+                    value={this.state.email}
                     autoCorrect={false}
                     keyboardType="email-address"
-                    // value={this.state.email}
-                    value={"matt.reetz@zymo.io"}
-                    onChangeText={email => this.setState({ email })}
+                    onChangeText={email => {
+                      this.setState({ email });
+                      this.props.validate(email, this.state.password);
+                    }}
                   />
                 </Item>
+                <Text style={styles.validation}>{this.props.emailError}</Text>
                 <Item floatingLabel style={styles.item}>
                   <Label>Password</Label>
                   <Input
-                    value={"abcd1234"}
                     secureTextEntry
-                    onChangeText={password => this.setState({ password })}
+                    value={this.state.password}
+                    onChangeText={password => {
+                      this.setState({ password });
+                      this.props.validate(this.state.email, password);
+                    }}
                   />
                 </Item>
+                <Text style={styles.validation}>{this.props.passwordError}</Text>
               </Form>
               <View style={styles.helpContainer}>
                 <View style={styles.buttonContainer}>
@@ -118,7 +135,7 @@ export default class LoginComponent extends Component<Props, State> {
                   />
                 </Animated.View>
               }
-            </View>
+            </Content>
           </Container>
         </StyleProvider>
       </Root>
@@ -127,6 +144,7 @@ export default class LoginComponent extends Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
+  validation: { color: platform.brandDanger },
   content: {
     flexDirection: "column",
     paddingLeft: 24,

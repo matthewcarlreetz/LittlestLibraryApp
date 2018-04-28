@@ -1,5 +1,6 @@
 export enum LoginTypeKeys {
   LOGIN = "LOGIN",
+  LOGIN_VALIDATION = "LOGIN_VALIDATION",
   LOGIN_SUCCESS = "LOGIN_SUCCESS",
   LOGIN_FAIL = "LOGIN_FAIL"
 }
@@ -7,6 +8,8 @@ export enum LoginTypeKeys {
 export interface User {
   email: string;
   token: string;
+  emailError: string;
+  passwordError: string;
   loggedIn: boolean;
 }
 
@@ -42,6 +45,13 @@ export interface LoginAction {
   payload: {
     password: string;
     email: string;
+  };
+}
+export interface LoginValidationAction {
+  type: LoginTypeKeys.LOGIN_VALIDATION;
+  payload: {
+    emailError: string;
+    passwordError: string;
   };
 }
 
