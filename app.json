@@ -1,4 +1,10 @@
 {
   "name": "LittlestLibrary",
-  "displayName": "LittlestLibrary"
+  "displayName": "LittlestLibrary",
+  "expo": {
+    "slug": "LittlestLibrary",
+    "name": "LittlestLibrary",
+    "sdkVersion": "27.0.0",
+    "entryPoint": "/Users/mattreetz/Documents/Programming/LittlestLibrary/LittlestLibraryApp/.vscode/exponentIndex.js"
+  }
 }

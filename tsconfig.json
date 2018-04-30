@@ -9,5 +9,7 @@
   },
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "sourceRoot": "src",
+  "inlineSourceMap": true,
 }
