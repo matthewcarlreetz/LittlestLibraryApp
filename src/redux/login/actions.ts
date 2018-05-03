@@ -19,6 +19,13 @@ export function login(email: string, password: string): LoginAction | LoginValid
   };
 }
 
+export function clearErrors(): LoginValidationAction {
+  return {
+    type: LoginTypeKeys.LOGIN_VALIDATION,
+    payload: { emailError: "", passwordError: "" }
+  };
+}
+
 export function validate(email: string, password: string): LoginValidationAction {
   const emailError = validator.validateEmail(email);
   const passwordError = validator.validatePassword(password);

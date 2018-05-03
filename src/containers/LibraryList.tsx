@@ -44,7 +44,7 @@ export default connect<ConnectProps, DispatchProps>(
   }),
   (dispatch: Dispatch) => ({
     loadLibraries: (token: string) =>
-      dispatch(LibraryActions.getLibraries(token)),
+      dispatch(LibraryActions.getLibraries(token, 44.5124, -87.99692)),
     showDetail: (library: Library) =>
       dispatch(LibraryActions.showDetail(library))
   })

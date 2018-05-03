@@ -6,11 +6,17 @@ export enum LoginTypeKeys {
 }
 
 export interface User {
-  email: string;
   token: string;
   emailError: string;
   passwordError: string;
+  authError: string;
   loggedIn: boolean;
+}
+
+export interface AuthResponse {
+  auth_token: string;
+  message: string;
+  response: Response;
 }
 
 export interface Auth {
@@ -57,11 +63,11 @@ export interface LoginValidationAction {
 
 export interface SuccessAction {
   type: LoginTypeKeys.LOGIN_SUCCESS;
-  payload: UserData;
+  payload: AuthResponse;
 }
 
 export interface FailAction {
   type: LoginTypeKeys.LOGIN_FAIL;
-  payload: UserData;
+  payload: AuthResponse;
 }
 //#endregion

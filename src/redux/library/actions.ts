@@ -1,9 +1,9 @@
 import { LibraryKeys, Libraries, LibraryAction, SelectLibraryAction, LibraryAddAction, Library, LibraryImageCapturedAction, LibraryImageCaptureStartedAction } from "./types";
 
-export function getLibraries(token: string): LibraryAction {
+export function getLibraries(token: string, lat: number, lon: number): LibraryAction {
   return {
     type: LibraryKeys.GET_LIBRARIES,
-    payload: { token }
+    payload: { token, lat, lon }
   };
 }
 

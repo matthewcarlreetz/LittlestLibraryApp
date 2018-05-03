@@ -5,7 +5,7 @@ import { fetchLibraries } from "../../api/libraryApi";
 
 function* getLibraries(action: LibraryAction) {
     try {
-        const libraries = yield fetchLibraries(action.payload.token);
+        const libraries = yield fetchLibraries(action.payload.token, action.payload.lat, action.payload.lon);
         yield put({ type: LibraryKeys.GET_LIBRARY_SUCCESS, payload: { libraries } });
     } catch (error) {
         yield put({ type: LibraryKeys.GET_LIBRARY_FAIL, payload: { error: error.message } });

@@ -35,7 +35,9 @@ export interface SelectLibraryAction {
 export interface LibraryAction {
   type: LibraryKeys.GET_LIBRARIES;
   payload: {
-    token: string;
+    token: string,
+    lat: number,
+    lon: number
   };
 }
 
@@ -63,4 +65,5 @@ export interface Library {
   lat: number;
   lon: number;
   id: number;
+  name: string;
 }

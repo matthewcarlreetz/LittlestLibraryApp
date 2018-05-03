@@ -11,28 +11,29 @@ import Animation from "lottie-react-native";
 
 interface Props {
   login: (email: string, password: string) => any;
-  validate: (email: string, password: string) => any;
+  clearErrors: (email: string, password: string) => any;
   loading: boolean;
   emailError: string;
   passwordError: string;
+  authError: string;
 }
 
 interface State {
   email: string;
   password: string;
-  // emailError: string;
-  // passwordError: string;
 }
 
 export default class LoginComponent extends Component<Props, State> {
   private animationCheckedDone: Animation;
   private fadeOut = new Animated.Value(1);
   private fadeIn = new Animated.Value(0);
+  private fadeInAnim: Animated.CompositeAnimation;
+  private fadeOutAnim: Animated.CompositeAnimation;
 
   constructor(props) {
     super(props);
     this.state = {
-      email: "", password: ""/*, emailError: "", passwordError: ""*/
+      email: "", password: ""
     };
   }
 
@@ -40,26 +41,42 @@ export default class LoginComponent extends Component<Props, State> {
     if (this.animationCheckedDone) {
       this.animationCheckedDone.play();
     }
+  }
 
-    if (this.props.loading) {
+  componentDidMount() {
+    if (this.animationCheckedDone) {
+      this.animationCheckedDone.play();
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const newProps = nextProps as Props;
+    if (newProps.loading !== this.props.loading) {
+      if (newProps.authError) {
+        this.showError(newProps.authError);
+      }
+
       Animated.timing(this.fadeOut, {
-        toValue: this.props.loading ? 0.5 : 1,
-        duration: 300,
+        toValue: newProps.loading ? 0.3 : 1,
+        duration: newProps.loading ? 100 : 300,
       }).start();
 
       Animated.timing(this.fadeIn, {
-        toValue: this.props.loading ? 1.0 : 0,
-        duration: 300,
+        toValue: newProps.loading ? 1.0 : 0,
+        duration: newProps.loading ? 300 : 300
       }).start();
     }
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   console.log("componentWillReceiveProps");
-  //   this.setState({
-  //     email: "", password: "", emailError: nextProps.emailError, passwordError: nextProps.passwordError
-  //   });
-  // }
+  showError(error) {
+    Toast.show({
+      text: error,
+      buttonText: "Okay",
+      duration: 3000,
+      position: "bottom",
+      type: "danger"
+    });
+  }
 
   render() {
     return (
@@ -80,7 +97,7 @@ export default class LoginComponent extends Component<Props, State> {
                     keyboardType="email-address"
                     onChangeText={email => {
                       this.setState({ email });
-                      this.props.validate(email, this.state.password);
+                      this.props.clearErrors(email, this.state.password);
                     }}
                   />
                 </Item>
@@ -92,7 +109,7 @@ export default class LoginComponent extends Component<Props, State> {
                     value={this.state.password}
                     onChangeText={password => {
                       this.setState({ password });
-                      this.props.validate(this.state.email, password);
+                      this.props.clearErrors(this.state.email, password);
                     }}
                   />
                 </Item>
@@ -111,6 +128,21 @@ export default class LoginComponent extends Component<Props, State> {
                 </View>
               </View>
 
+              <Animated.View style={{
+                opacity: this.fadeIn,
+                width: 327,
+                margin: 0, padding: 0,
+                height: 48, alignItems: "center", justifyContent: "center"
+              }}>
+                <Animation
+                  ref={(animation: Animation) => {
+                    this.animationCheckedDone = animation;
+                  }}
+                  loop={true}
+                  source={require("../../assets/anim/animation-w800-h600.json")}
+                />
+              </Animated.View>
+
               <Animated.View style={{ opacity: this.fadeOut }}>
                 <LLButton
                   onPress={() => this.props.login(this.state.email, this.state.password)}
@@ -119,22 +151,6 @@ export default class LoginComponent extends Component<Props, State> {
                   disabled={this.props.loading}
                 />
               </Animated.View>
-              {
-                this.props.loading &&
-                <Animated.View style={{
-                  opacity: this.fadeIn,
-                  width: 327,
-                  height: 100, alignItems: "center", justifyContent: "center"
-                }}>
-                  <Animation
-                    ref={(animation: Animation) => {
-                      this.animationCheckedDone = animation;
-                    }}
-                    loop={true}
-                    source={require("../../assets/anim/loading.json")}
-                  />
-                </Animated.View>
-              }
             </Content>
           </Container>
         </StyleProvider>
@@ -165,8 +181,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end"
   },
   button: {
-    margin: 16,
-    marginTop: 48
+    margin: 16
   },
   textContent: {
     fontSize: 20,

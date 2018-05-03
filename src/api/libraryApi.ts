@@ -1,14 +1,16 @@
 import { Library } from "../redux/library/types";
-import { url } from "./envVars";
+import { baseUrl } from "./envVars";
 
-export async function fetchLibraries(token: string): Promise<[Library]> {
-    const request = new Request(url + "library", {
+export async function fetchLibraries(token: string, lat: number, lon: number): Promise<[Library]> {
+    const url = baseUrl + "libraries?lat=" + lat + "&lon=" + lon;
+    console.log("requesting libraries", url, token);
+    const request = new Request(url, {
         headers: new Headers({
-            access_token: token
+            Authorization: token
         })
     });
-    const loginResponse = await fetch(request);
-    const retVal = (await loginResponse.json()) as [Library];
+    const response = await fetch(request);
+    const retVal = (await response.json()) as [Library];
     console.log("got libraries", retVal);
     return retVal;
 }
