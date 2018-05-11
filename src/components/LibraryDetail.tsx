@@ -5,6 +5,8 @@ import { Library } from "../redux/library/types";
 import { Container, Content, Body, Root, Text, H1, ActionSheet } from "native-base";
 import getTheme from "../../native-base-theme/components/index";
 import platform from "../../native-base-theme/variables/platform";
+import { baseUrl } from "../api/envVars";
+
 const BUTTONS = ["Get Directions", "Report Image Inappropriate", "Report Invalid Location", "Cancel"];
 const DESTRUCTIVE_INDEX = 3;
 const CANCEL_INDEX = 3;
@@ -22,7 +24,7 @@ export default class LibraryDetail extends Component<Props, State> {
                 <StyleProvider style={getTheme(platform)}>
                     <Container>
                         <Content>
-                            <Image source={require("../../assets/library.jpg")} style={styles.libraryImage} />
+                            <Image source={{ uri: (baseUrl + this.props.library.image.url) }} style={styles.libraryImage} />
                             <View style={styles.divider} />
                             <View style={styles.body}>
                                 <View style={styles.address}>

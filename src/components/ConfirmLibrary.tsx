@@ -10,6 +10,10 @@ import platform from "../../native-base-theme/variables/platform";
 
 export interface ConnectProps {
     imageData: string;
+    lat: number;
+    lon: number;
+    token: string;
+    upload: (token: string, lat: number, lon: number, imageData: string) => any;
 }
 
 interface State {
@@ -23,12 +27,13 @@ export default class LibraryDetail extends Component<ConnectProps, State> {
                     <View style={styles.container}>
                         <Image
                             style={styles.preview}
-                            source={{ uri: "data:image/png;base64," + this.props.imageData }}
+                            source={{ uri: this.props.imageData }}
                         />
                         <View style={styles.userArea}>
                             <Text style={styles.explanation}>An explanation of what to do</Text>
                             <LLButton
                                 text="Confirm"
+                                onPress={() => this.props.upload(this.props.token, this.props.lat, this.props.lon, this.props.imageData)}
                                 style={styles.button}
                             />
                         </View>

@@ -1,7 +1,7 @@
 import { delay } from "redux-saga";
 import { put, takeEvery, all, takeLatest } from "redux-saga/effects";
-import { LibraryKeys, LibraryAction } from "./types";
-import { fetchLibraries } from "../../api/libraryApi";
+import { LibraryKeys, LibraryAction, LibraryUploadAction } from "./types";
+import { fetchLibraries, addLibrary } from "../../api/libraryApi";
 
 function* getLibraries(action: LibraryAction) {
     try {
@@ -16,6 +16,19 @@ function* watchGetLibraries() {
     yield takeEvery(LibraryKeys.GET_LIBRARIES, getLibraries);
 }
 
+function* uploadLibrary(action: LibraryUploadAction) {
+    try {
+        const library = yield addLibrary(action.payload.token, action.payload.lat, action.payload.lon, action.payload.imageData);
+        yield put({ type: LibraryKeys.UPLOAD_LIBRARY_SUCCESS, payload: library });
+    } catch (error) {
+        yield put({ type: LibraryKeys.UPLOAD_LIBRARY_FAIL, payload: { error: error.message } });
+    }
+}
+
+function* watchUploadLibrary() {
+    yield takeEvery(LibraryKeys.UPLOAD_LIBRARY, uploadLibrary);
+}
+
 export default function* rootSaga() {
-    yield all([watchGetLibraries()]);
+    yield all([watchGetLibraries(), watchUploadLibrary()]);
 }

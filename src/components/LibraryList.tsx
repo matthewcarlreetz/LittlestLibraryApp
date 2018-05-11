@@ -6,6 +6,7 @@ import {
     Right, Text, Spinner, Header, Title
 } from "native-base";
 import { showDetail } from "../redux/library/actions";
+import { baseUrl } from "../api/envVars";
 
 interface Props {
     libraries: [Library];
@@ -29,7 +30,7 @@ export default class LibraryList extends Component<Props, {}> {
                                     }}
                                 >
                                     <Left>
-                                        <Thumbnail source={require("../../assets/library.jpg")} />
+                                        <Thumbnail source={{ uri: (baseUrl + item.image.url) }} />
                                     </Left>
                                     <Body>
                                         <Text>{item.address}</Text>

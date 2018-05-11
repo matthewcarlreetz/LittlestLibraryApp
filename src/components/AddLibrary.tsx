@@ -68,7 +68,7 @@ export default class LibraryDetail extends Component<ConnectProps, State> {
             this.props.imageCaptureStarted();
             this.camera.takePictureAsync({ quality: 0.5, base64: true })
                 .then((data) => {
-                    this.props.imageCaptured(data.base64);
+                    this.props.imageCaptured("data:image/png;base64," + data.base64);
                     this.props.requestLocation();
                 })
                 .catch((err: any) => console.error(err));
