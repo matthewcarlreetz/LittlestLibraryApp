@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import { reducer as formReducer } from "redux-form";
 import nav from "./navigation/reducer";
 import ui from "./ui/reducer";
 import libraries from "./library/reducer";
@@ -14,8 +13,7 @@ const appReducer = combineReducers<AppState>({
   user,
   libraries,
   location,
-  ui,
-  formReducer
+  ui
 });
 
 const rootReducer = (state, action) => {

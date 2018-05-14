@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, Image, Animated } from "react-native";
+import { View, StyleSheet, Text, Image, Animated, TextInput } from "react-native";
 import { StyleProvider } from "native-base";
 import getTheme from "../../native-base-theme/components/index";
 import platform from "../../native-base-theme/variables/platform";
@@ -29,6 +29,7 @@ export default class LoginComponent extends Component<Props, State> {
   private fadeIn = new Animated.Value(0);
   private fadeInAnim: Animated.CompositeAnimation;
   private fadeOutAnim: Animated.CompositeAnimation;
+  private passwordTextInput: TextInput;
 
   constructor(props) {
     super(props);
@@ -93,11 +94,15 @@ export default class LoginComponent extends Component<Props, State> {
                   <Input
                     autoCapitalize="none"
                     value={this.state.email}
+                    returnKeyType={"next"}
                     autoCorrect={false}
                     keyboardType="email-address"
                     onChangeText={email => {
                       this.setState({ email });
                       this.props.clearErrors(email, this.state.password);
+                    }}
+                    onSubmitEditing={asdf => {
+                      this.passwordTextInput.focus();
                     }}
                   />
                 </Item>
@@ -105,6 +110,8 @@ export default class LoginComponent extends Component<Props, State> {
                 <Item floatingLabel style={styles.item}>
                   <Label>Password</Label>
                   <Input
+                    getRef={(input) => this.passwordTextInput = input._root}
+                    returnKeyType={"done"}
                     secureTextEntry
                     value={this.state.password}
                     onChangeText={password => {
