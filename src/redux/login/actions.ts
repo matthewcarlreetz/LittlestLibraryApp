@@ -1,4 +1,4 @@
-import { LoginTypeKeys, LoginAction, LoginValidationAction } from "./types";
+import { LoginTypeKeys, LoginAction, LoginValidationAction, GetStoredTokenAction, SuccessAction } from "./types";
 import { Validator } from "../../util/Validator";
 
 const validator = new Validator();
@@ -19,10 +19,23 @@ export function login(email: string, password: string): LoginAction | LoginValid
   };
 }
 
+export function skipLogin(token: string): SuccessAction {
+  return {
+    type: LoginTypeKeys.LOGIN_SUCCESS,
+    payload: { auth_token: token, message: "", response: null }
+  };
+}
+
 export function clearErrors(): LoginValidationAction {
   return {
     type: LoginTypeKeys.LOGIN_VALIDATION,
     payload: { emailError: "", passwordError: "" }
+  };
+}
+
+export function getStoredToken(): GetStoredTokenAction {
+  return {
+    type: LoginTypeKeys.GET_STORED_TOKEN
   };
 }
 

@@ -28,8 +28,12 @@ export interface ConnectProps {
 interface State {
 }
 
-export default class LibraryDetail extends Component<ConnectProps, State> {
+export default class AddLibrary extends Component<ConnectProps, State> {
     camera: RNCamera;
+
+    componentDidMount() {
+        console.log("componentDidMount - AddLibrary");
+    }
 
     render() {
         return (

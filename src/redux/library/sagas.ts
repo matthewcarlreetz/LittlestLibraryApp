@@ -1,6 +1,6 @@
 import { delay } from "redux-saga";
 import { put, takeEvery, all, takeLatest } from "redux-saga/effects";
-import { LibraryKeys, LibraryAction, LibraryUploadAction } from "./types";
+import { LibraryKeys, LibraryAction, LibraryUploadAction, Library } from "./types";
 import { fetchLibraries, addLibrary } from "../../api/libraryApi";
 
 function* getLibraries(action: LibraryAction) {
@@ -19,7 +19,12 @@ function* watchGetLibraries() {
 function* uploadLibrary(action: LibraryUploadAction) {
     try {
         const library = yield addLibrary(action.payload.token, action.payload.lat, action.payload.lon, action.payload.imageData);
-        yield put({ type: LibraryKeys.UPLOAD_LIBRARY_SUCCESS, payload: library });
+        const payload = library as Library;
+        if (payload.response.ok) {
+            yield put({ type: LibraryKeys.UPLOAD_LIBRARY_SUCCESS, payload: library });
+        } else {
+            yield put({ type: LibraryKeys.UPLOAD_LIBRARY_FAIL, payload: { error: library.message } });
+        }
     } catch (error) {
         yield put({ type: LibraryKeys.UPLOAD_LIBRARY_FAIL, payload: { error: error.message } });
     }

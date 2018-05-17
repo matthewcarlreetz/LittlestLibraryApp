@@ -1,3 +1,11 @@
+export enum UIState {
+  NONE,
+  LOADING,
+  SHOW_FAIL,
+  SHOW_SUCCESS,
+}
+
 export interface UI {
-  loading: boolean;
+  uiState: UIState;
+  message: string;
 }

@@ -1,6 +1,8 @@
 export enum LoginTypeKeys {
   LOGIN = "LOGIN",
   LOGIN_VALIDATION = "LOGIN_VALIDATION",
+  GET_STORED_TOKEN = "GET_STORED_TOKEN",
+  FETCHED_TOKEN = "FETCHED_TOKEN",
   LOGIN_SUCCESS = "LOGIN_SUCCESS",
   LOGIN_FAIL = "LOGIN_FAIL"
 }
@@ -46,6 +48,15 @@ export interface UserData {
 }
 
 //#region Actions
+export interface GetStoredTokenAction {
+  type: LoginTypeKeys.GET_STORED_TOKEN;
+}
+
+export interface FetchedTokenAction {
+  type: LoginTypeKeys.FETCHED_TOKEN;
+  payload: string;
+}
+
 export interface LoginAction {
   type: LoginTypeKeys.LOGIN;
   payload: {
@@ -53,6 +64,7 @@ export interface LoginAction {
     email: string;
   };
 }
+
 export interface LoginValidationAction {
   type: LoginTypeKeys.LOGIN_VALIDATION;
   payload: {
@@ -68,6 +80,6 @@ export interface SuccessAction {
 
 export interface FailAction {
   type: LoginTypeKeys.LOGIN_FAIL;
-  payload: AuthResponse;
+  payload: { error: string };
 }
 //#endregion

@@ -27,7 +27,7 @@ export async function addLibrary(token: string, lat: number, lon: number, image:
             "Content-Type": "application/json"
         })
     });
-    const retVal = (await response.json()) as Library;
-    console.log("uploaded library", retVal);
-    return retVal;
+    const uploadResponse = (await response.json()) as Library;
+    uploadResponse.response = response;
+    return uploadResponse;
 }

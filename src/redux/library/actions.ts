@@ -1,7 +1,8 @@
 import {
   LibraryKeys, Libraries, LibraryAction, SelectLibraryAction,
   LibraryAddAction, Library, LibraryImageCapturedAction,
-  LibraryImageCaptureStartedAction, LibraryUploadAction
+  LibraryImageCaptureStartedAction, LibraryUploadAction,
+  LibraryAddCompleteAction
 } from "./types";
 
 export function getLibraries(token: string, lat: number, lon: number): LibraryAction {
@@ -21,6 +22,13 @@ export function showDetail(library: Library): SelectLibraryAction {
 export function addLibrary(): LibraryAddAction {
   return {
     type: LibraryKeys.ADD_LIBRARY,
+    payload: {}
+  };
+}
+
+export function addLibraryComplete(): LibraryAddCompleteAction {
+  return {
+    type: LibraryKeys.ADD_LIBRARY_COMPLETE,
     payload: {}
   };
 }

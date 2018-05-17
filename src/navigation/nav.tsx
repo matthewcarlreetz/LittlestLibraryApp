@@ -70,8 +70,7 @@ export const MainStack = StackNavigator(
   },
   {
     mode: "modal",
-    headerMode: "none",
-    backBehavior: "none"
+    headerMode: "none"
   },
 );
 
@@ -89,6 +88,7 @@ class RootNavigatorHost extends React.PureComponent<INavigatorHostProps> {
   }
 
   onBackPress = () => {
+    console.log("onBackPress");
     const { dispatch, nav } = this.props;
     if (nav.index === 0) {
       return false;

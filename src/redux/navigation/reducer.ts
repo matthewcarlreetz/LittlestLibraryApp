@@ -11,7 +11,6 @@ export default function nav(state = initialState, action) {
     let nextState;
     switch (action.type) {
         case LoginTypeKeys.LOGIN_SUCCESS:
-            console.log("nav login success", action);
             nextState = MainStack.router.getStateForAction(
                 NavigationActions.navigate({ routeName: "Main" }),
                 state
@@ -32,6 +31,18 @@ export default function nav(state = initialState, action) {
         case LibraryKeys.IMAGE_CAPTURED:
             nextState = MainStack.router.getStateForAction(
                 NavigationActions.navigate({ routeName: "Confirm" }),
+                state
+            );
+            break;
+        case LibraryKeys.ADD_LIBRARY_COMPLETE:
+            nextState = MainStack.router.getStateForAction(
+                NavigationActions.popToTop({}),
+                state
+            );
+            break;
+        case LoginTypeKeys.FETCHED_TOKEN:
+            nextState = MainStack.router.getStateForAction(
+                NavigationActions.popToTop({}),
                 state
             );
             break;

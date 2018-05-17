@@ -11,6 +11,10 @@ interface Props {
 }
 
 export default class LLButton extends Component<Props, {}> {
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps", nextProps);
+  }
+
   render() {
     return (
       <Button

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AddLibrary from "../components/AddLibrary";
 import { connect } from "react-redux";
 import { Dispatch, AppState } from "../redux/types";
+import { UIState } from "../redux/ui/types";
 import * as LocationActions from "../redux/location/actions";
 import * as  LibraryActions from "../redux/library/actions";
 import Permissions from "react-native-permissions";
@@ -51,7 +52,7 @@ export default connect<ConnectProps, DispatchProps>(
     (state: AppState) => ({
         location: state.location.latestLocation,
         hasPermission: state.location.hasPermission,
-        loading: state.ui.loading
+        loading: state.ui.uiState === UIState.LOADING
     }),
     (dispatch: Dispatch) => ({
         askLocationPermission: () =>

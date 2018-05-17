@@ -1,12 +1,17 @@
-import { UI } from "./types";
+import { UI, UIState } from "./types";
 import { LoginTypeKeys, SuccessAction, FailAction, LoginAction } from "../login/types";
-import { LibraryKeys, LibraryImageCapturedAction, LibraryImageCaptureStartedAction } from "../library/types";
+import { LibraryKeys, LibraryImageCapturedAction, LibraryImageCaptureStartedAction, LibraryUploadAction, LibraryUploadSuccessAction, LibraryUploadFailAction, LibraryAddCompleteAction } from "../library/types";
+import { NavigationBackAction } from "react-navigation";
 
 const initialState = {
-    loading: false,
+    uiState: UIState.NONE,
+    message: ""
 };
 
-export type ActionTypes = SuccessAction | FailAction | LoginAction | LibraryImageCapturedAction | LibraryImageCaptureStartedAction;
+export type ActionTypes =
+    SuccessAction | FailAction | LoginAction | LibraryImageCapturedAction | LibraryImageCaptureStartedAction |
+    LibraryUploadAction | NavigationBackAction | LibraryUploadSuccessAction | LibraryUploadFailAction |
+    LibraryAddCompleteAction;
 
 export default function uiReducer(
     state: UI = initialState,
@@ -14,26 +19,26 @@ export default function uiReducer(
 ): UI {
     switch (action.type) {
         case LoginTypeKeys.LOGIN:
+        case LibraryKeys.IMAGE_CAPTURE_STARTED:
+        case LibraryKeys.UPLOAD_LIBRARY:
             return {
-                ...state, loading: true
-            };
-        case LoginTypeKeys.LOGIN_SUCCESS:
-            return {
-                ...state, loading: false
+                ...state, uiState: UIState.LOADING
             };
         case LoginTypeKeys.LOGIN_FAIL:
+        case LibraryKeys.UPLOAD_LIBRARY_FAIL:
             return {
-                ...state, loading: false
+                ...state, message: action.payload.error, uiState: UIState.SHOW_FAIL
             };
-        case LibraryKeys.IMAGE_CAPTURE_STARTED:
-            console.log("Started");
-            return {
-                ...state, loading: true
-            };
+        case "Navigation/BACK":
+        case LoginTypeKeys.LOGIN_SUCCESS:
         case LibraryKeys.IMAGE_CAPTURED:
-            console.log("Ended");
+        case LibraryKeys.ADD_LIBRARY_COMPLETE:
             return {
-                ...state, loading: false
+                ...state, uiState: UIState.NONE
+            };
+        case LibraryKeys.UPLOAD_LIBRARY_SUCCESS:
+            return {
+                ...state, uiState: UIState.SHOW_SUCCESS
             };
         default:
             return state;
